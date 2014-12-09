@@ -1,25 +1,24 @@
 # TODO:
-# - proper place for *.pri,
-# - set ECM_MKSPECS_INSTALL_DIR in kde5-extra-cmake-modules
 # - runtime Requires if any
 # - dir /usr/include/KF5 not packaged
-%define         _state          stable
-%define		orgname		karchive
+%define		kdeframever	5.4
+%define		qtver		5.3.2
+%define		kfname		karchive
 
 Summary:	Reading, creating, and manipulating file archives
-Name:		kf5-%{orgname}
-Version:	5.0.0
+Name:		kf5-%{kfname}
+Version:	5.4.0
 Release:	0.1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
-Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/frameworks/%{version}/%{orgname}-%{version}.tar.xz
-# Source0-md5:	58e76e44a262cc184af4424d8dc1230b
+Source0:	http://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
+# Source0-md5:	e262c00b2df60c8e8cc78167c4581341
 URL:		http://www.kde.org/
-BuildRequires:	Qt5Core-devel >= 5.2.0
-BuildRequires:	Qt5Test-devel
+BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5Test-devel >= %{qtver}
 BuildRequires:	bzip2-devel
 BuildRequires:	cmake >= 2.8.12
-BuildRequires:	kf5-extra-cmake-modules >= 1.0.0
+BuildRequires:	kf5-extra-cmake-modules >= 1.4.0
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -37,35 +36,25 @@ If also provides transparent compression and decompression of data,
 like the GZip format, via a subclass of QIODevice.
 
 %package devel
-Summary:	Header files for %{orgname} development
-Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{orgname}
+Summary:	Header files for %{kfname} development
+Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kfname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-Header files for %{orgname} development.
+Header files for %{kfname} development.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe dla programistów używających %{orgname}.
+Pliki nagłówkowe dla programistów używających %{kfname}.
 
 %prep
-%setup -q -n %{orgname}-%{version}
+%setup -q -n %{kfname}-%{version}
 
 %build
 install -d build
 cd build
 %cmake \
-	-DBIN_INSTALL_DIR=%{_bindir} \
-	-DKCFG_INSTALL_DIR=%{_datadir}/config.kcfg \
-	-DPLUGIN_INSTALL_DIR=%{qt5dir}/plugins \
-	-DQT_PLUGIN_INSTALL_DIR=%{qt5dir}/plugins \
-	-DQML_INSTALL_DIR=%{qt5dir}/qml \
-	-DIMPORTS_INSTALL_DIR=%{qt5dirs}/imports \
-	-DSYSCONF_INSTALL_DIR=%{_sysconfdir} \
-	-DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
-	-DKF5_LIBEXEC_INSTALL_DIR=%{_libexecdir} \
-	-DKF5_INCLUDE_INSTALL_DIR=%{_includedir} \
-	-DECM_MKSPECS_INSTALL_DIR=%{qt5dir}/mkspecs/modules \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	..
 %{__make}
 
@@ -85,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README.md
 %attr(755,root,root) %ghost %{_libdir}/libKF5Archive.so.5
-%attr(755,root,root) %{_libdir}/libKF5Archive.so.5.0.0
+%attr(755,root,root) %{_libdir}/libKF5Archive.so.5.4.0
 
 %files devel
 %defattr(644,root,root,755)
