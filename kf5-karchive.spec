@@ -1,17 +1,17 @@
 # TODO:
 # - runtime Requires if any
-%define		kdeframever	5.43
+%define		kdeframever	5.45
 %define		qtver		5.3.2
 %define		kfname		karchive
 
 Summary:	Reading, creating, and manipulating file archives
 Name:		kf5-%{kfname}
-Version:	5.43.0
+Version:	5.45.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	5d28038e34f01ec59968b3a4732128d5
+# Source0-md5:	ab746a2ae8fbad0a2fbac31377d7d403
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Test-devel >= %{qtver}
