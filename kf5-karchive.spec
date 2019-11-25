@@ -1,17 +1,17 @@
 # TODO:
 # - runtime Requires if any
-%define		kdeframever	5.59
+%define		kdeframever	5.62
 %define		qtver		5.9.0
 %define		kfname		karchive
 
 Summary:	Reading, creating, and manipulating file archives
 Name:		kf5-%{kfname}
-Version:	5.59.0
+Version:	5.62.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	9d06b19821edadb57f0892bafbd41560
+# Source0-md5:	4acf9f1011f42ecd78a6a0916f2288a9
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Test-devel >= %{qtver}
@@ -74,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS README.md
 %attr(755,root,root) %ghost %{_libdir}/libKF5Archive.so.5
 %attr(755,root,root) %{_libdir}/libKF5Archive.so.*.*
-%config(noreplace) %verify(not md5 mtime size) /etc/xdg/karchive.categories
+%config(noreplace) %verify(not md5 mtime size) %{_datadir}/qlogging-categories5/karchive.categories
 
 %files devel
 %defattr(644,root,root,755)
