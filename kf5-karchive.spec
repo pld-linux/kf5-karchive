@@ -1,17 +1,17 @@
 # TODO:
 # - runtime Requires if any
-%define		kdeframever	5.79
+%define		kdeframever	5.80
 %define		qtver		5.9.0
 %define		kfname		karchive
 
 Summary:	Reading, creating, and manipulating file archives
 Name:		kf5-%{kfname}
-Version:	5.79.0
+Version:	5.80.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	d9f0b3edb5610f709f849d0fcbeaa6a7
+# Source0-md5:	a9d2d2df5d37913a87f4367e4aba9970
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Test-devel >= %{qtver}
@@ -72,7 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS README.md
-%attr(755,root,root) %ghost %{_libdir}/libKF5Archive.so.5
+%ghost %{_libdir}/libKF5Archive.so.5
 %attr(755,root,root) %{_libdir}/libKF5Archive.so.*.*
 %config(noreplace) %verify(not md5 mtime size) %{_datadir}/qlogging-categories5/karchive.categories
 %{_datadir}/qlogging-categories5/karchive.renamecategories
@@ -81,6 +81,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_includedir}/KF5/KArchive
 %{_includedir}/KF5/karchive_version.h
-%attr(755,root,root) %{_libdir}/libKF5Archive.so
+%{_libdir}/libKF5Archive.so
 %{_libdir}/cmake/KF5Archive
 %{qt5dir}/mkspecs/modules/qt_KArchive.pri
