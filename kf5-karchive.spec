@@ -20,7 +20,7 @@ BuildRequires:	bzip2-devel
 BuildRequires:	cmake >= 3.5
 BuildRequires:	kf5-extra-cmake-modules >= %{version}
 BuildRequires:	ninja
-BuildRequires:	rpmbuild(macros) >= 1.164
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	xz-devel
