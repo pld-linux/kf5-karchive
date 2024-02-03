@@ -3,25 +3,26 @@
 %bcond_with	tests		# build with tests
 # TODO:
 # - runtime Requires if any
-%define		kdeframever	5.114
+%define		kdeframever	5.249.0
 %define		qtver		5.15.2
 %define		kfname		karchive
 
 Summary:	Reading, creating, and manipulating file archives
 Name:		kf5-%{kfname}
-Version:	5.114.0
-Release:	1
+Version:	5.249.0
+Release:	0.1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
-Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	8652c351ad2ae2629217f5482733263e
+Source0:	https://download.kde.org/unstable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
+# Source0-md5:	354ea24fe189f46d17f5b165d824e13b
 URL:		http://www.kde.org/
-BuildRequires:	Qt5Core-devel >= %{qtver}
-BuildRequires:	Qt5Network-devel >= %{qtver}
-BuildRequires:	Qt5Test-devel >= %{qtver}
+BuildRequires:	Qt6Core-devel >= %{qtver}
+BuildRequires:	Qt6Network-devel >= %{qtver}
+BuildRequires:	Qt6Test-devel >= %{qtver}
 BuildRequires:	bzip2-devel
 BuildRequires:	cmake >= 3.16
 BuildRequires:	kf5-extra-cmake-modules >= %{version}
+BuildRequires:	qt6-linguist
 BuildRequires:	ninja
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.736
@@ -30,7 +31,7 @@ BuildRequires:	xz
 BuildRequires:	xz-devel
 BuildRequires:	zlib-devel
 BuildRequires:	zstd-devel
-Requires:	Qt5Core >= %{qtver}
+Requires:	Qt6Core >= %{qtver}
 Requires:	kf5-dirs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -48,7 +49,7 @@ Summary:	Header files for %{kfname} development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kfname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	Qt5Core-devel >= %{qtver}
+Requires:	Qt6Core-devel >= %{qtver}
 Requires:	cmake >= 3.16
 
 %description devel
@@ -77,23 +78,24 @@ Pliki nagłówkowe dla programistów używających %{kfname}.
 rm -rf $RPM_BUILD_ROOT
 %ninja_install -C build
 
+%find_lang %{kfname} --all-name --with-qm
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files
+%files -f %{kfname}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS README.md
-%ghost %{_libdir}/libKF5Archive.so.5
-%attr(755,root,root) %{_libdir}/libKF5Archive.so.*.*
-%config(noreplace) %verify(not md5 mtime size) %{_datadir}/qlogging-categories5/karchive.categories
-%{_datadir}/qlogging-categories5/karchive.renamecategories
+%ghost %{_libdir}/libKF6Archive.so.6
+%attr(755,root,root) %{_libdir}/libKF6Archive.so.*.*
+%config(noreplace) %verify(not md5 mtime size) %{_datadir}/qlogging-categories6/karchive.categories
+%{_datadir}/qlogging-categories6/karchive.renamecategories
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/KF5/KArchive
-%{_libdir}/libKF5Archive.so
-%{_libdir}/cmake/KF5Archive
-%{qt5dir}/mkspecs/modules/qt_KArchive.pri
+%{_includedir}/KF6/KArchive
+%{_libdir}/libKF6Archive.so
+%{_libdir}/cmake/KF6Archive
